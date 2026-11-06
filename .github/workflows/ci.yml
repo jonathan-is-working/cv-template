@@ -1,0 +1,71 @@
+name: CI - Build & Verify Resumes
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Compile & Validate Typst CVs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Install PDF verification tools (poppler-utils)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Compile Resumes
+        run: |
+          mkdir -p output
+          echo "==> Compiling French CV..."
+          typst compile src/cv-fr.typ output/cv-fr.pdf
+          echo "==> Compiling English CV..."
+          typst compile src/cv-en.typ output/cv-en.pdf
+
+      - name: Validate 1-Page Layout
+        run: |
+          FR_PAGES=$(pdfinfo output/cv-fr.pdf | grep "Pages:" | awk '{print $2}')
+          EN_PAGES=$(pdfinfo output/cv-en.pdf | grep "Pages:" | awk '{print $2}')
+          echo "French CV pages: $FR_PAGES"
+          echo "English CV pages: $EN_PAGES"
+          if [ "$FR_PAGES" -ne 1 ]; then
+            echo "::error file=src/cv-fr.typ::French CV exceeds 1 page (actual: $FR_PAGES pages)"
+            exit 1
+          fi
+          if [ "$EN_PAGES" -ne 1 ]; then
+            echo "::error file=src/cv-en.typ::English CV exceeds 1 page (actual: $EN_PAGES pages)"
+            exit 1
+          fi
+          echo "All CVs strictly satisfy the 1-page requirement."
+
+      - name: Upload PDF Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-cvs
+          path: |
+            output/cv-fr.pdf
+            output/cv-en.pdf
+          if-no-files-found: error
+
+      - name: Create GitHub Release on Tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            output/cv-fr.pdf
+            output/cv-en.pdf
+          draft: false
+          prerelease: false
+          generate_release_notes: true

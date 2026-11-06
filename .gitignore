@@ -1,0 +1,25 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Generated PDFs & Build Output (keeps your compiled CV private)
+/output/*
+!/output/.gitkeep
+!/output/README.md
+/dist/
+*.pdf
+
+# Personal files (optional local working copies)
+personal/
+*-perso.typ
+my-*.typ
+
+# Temporary files
+*.tmp
+*.log
