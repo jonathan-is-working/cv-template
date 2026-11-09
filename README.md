@@ -6,7 +6,7 @@
 *Available in English & French with optional top-left profile photo and automatic CI/CD compilation.*
 
 [![Typst](https://img.shields.io/badge/Typst-0.11%2B-239dad?style=for-the-badge&logo=typst&logoColor=white)](https://typst.app/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT%20%2F%20Apache--2.0-blue?style=for-the-badge)](#-license)
 [![CI Status](https://img.shields.io/badge/CI-Automated%20Build-success?style=for-the-badge&logo=githubactions&logoColor=white)](#-automated-cicd-with-github-actions)
 [![Format](https://img.shields.io/badge/Format-1%20Page%20A4-orange?style=for-the-badge)](#)
 [![ATS](https://img.shields.io/badge/ATS-Optimized-brightgreen?style=for-the-badge)](#-ats--machine-readability)
@@ -56,7 +56,8 @@ Each template includes **guided instructions** (action verbs, metrics, structure
 │   └── template.typ
 ├── .gitignore
 ├── CONTRIBUTING.md
-├── LICENSE
+├── LICENSE-APACHE
+├── LICENSE-MIT
 ├── Makefile
 └── README.md
 ```
@@ -235,7 +236,7 @@ Contributions and feedback are welcome. Please check our [Contributing Guideline
 
 ## 📜 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+Dual-licensed under [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
 
 <div align="center">
   <sub>Built with Typst. If you find this template useful, please consider starring the repository.</sub>

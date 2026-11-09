@@ -30,3 +30,5 @@ Thank you for considering contributing to this template! 🎉
 - **Simplicity first**: Avoid unnecessary visual clutter. The goal is clean ATS-friendly minimalism.
 - **Cross-platform**: Rely only on standard fonts bundled with Typst (e.g. *New Computer Modern*).
 - **Language symmetry**: Any structural modification to the French template should be reflected in the English version.
+
+By contributing, you agree that your contributions are licensed under the project's terms (MIT OR Apache-2.0).
